@@ -42,7 +42,7 @@ Motor_2.setSpeed(50)
 Motor_3.setSpeed(50)
 Motor_4.setSpeed(50)
 
-dwell_time = .1
+dwell_time = 1
 
 while True:
     command = input_char("Command (x to quit):")
