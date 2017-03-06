@@ -6,7 +6,7 @@ import threading
 import random
 
 # create a default object, no changes to I2C address or frequency
-mh = Adafruit_MotorHAT()
+mh = Adafruit_MotorHAT(addr = 0x63)
 
 # create empty threads (these will hold the stepper 1 and 2 threads)
 st1 = threading.Thread()
@@ -35,7 +35,7 @@ def stepper_worker(stepper, numsteps, direction, style):
     stepper.step(numsteps, direction, style)
     #print("Done")
 
-for i in range(200):
+for i in range(500):
     if not st1.isAlive():
         dir = Adafruit_MotorHAT.FORWARD
         st1 = threading.Thread(target=stepper_worker, args=(myStepper1, 51, dir, Adafruit_MotorHAT.MICROSTEP))
@@ -45,36 +45,35 @@ for i in range(200):
         st2 = threading.Thread(target=stepper_worker, args=(myStepper2, 51, dir, Adafruit_MotorHAT.MICROSTEP))
         st2.start()
 
-turnOffMotors()
 
-#
-#for i in range(4):
-#    if not st1.isAlive():
-#        randomdir = random.randint(0, 1)
-#        print("Stepper 1"),
-#        if (randomdir == 0):
-#            dir = Adafruit_MotorHAT.FORWARD
-#            print("forward"),
-#        else:
-#            dir = Adafruit_MotorHAT.BACKWARD
-#            print("backward"),
-#        randomsteps = random.randint(10,50)
-#        print("%d steps" % randomsteps)
-#        st1 = threading.Thread(target=stepper_worker, args=(myStepper1, randomsteps, dir, stepstyles[random.randint(0,3)],))
-#        st1.start()
-#
-#    if not st2.isAlive():
-#        print("Stepper 2"),
-#        randomdir = random.randint(0, 1)
-#        if (randomdir == 0):
-#            dir = Adafruit_MotorHAT.FORWARD
-#            print("forward"),
-#        else:
-#            dir = Adafruit_MotorHAT.BACKWARD
-#            print("backward"),
-#
-#        randomsteps = random.randint(10,50)
-#        print("%d steps" % randomsteps)
-#
-#        st2 = threading.Thread(target=stepper_worker, args=(myStepper2, randomsteps, dir, stepstyles[random.randint(0,3)],))
-#        st2.start()
+
+# for i in range(4):
+#     if not st1.isAlive():
+#         randomdir = random.randint(0, 1)
+#         print("Stepper 1"),
+#         if (randomdir == 0):
+#             dir = Adafruit_MotorHAT.FORWARD
+#             print("forward"),
+#         else:
+#             dir = Adafruit_MotorHAT.BACKWARD
+#             print("backward"),
+#         randomsteps = random.randint(10,50)
+#         print("%d steps" % randomsteps)
+#         st1 = threading.Thread(target=stepper_worker, args=(myStepper1, randomsteps, dir, stepstyles[random.randint(0,3)],))
+#         st1.start()
+# 
+#     if not st2.isAlive():
+#         print("Stepper 2"),
+#         randomdir = random.randint(0, 1)
+#         if (randomdir == 0):
+#             dir = Adafruit_MotorHAT.FORWARD
+#             print("forward"),
+#         else:
+#             dir = Adafruit_MotorHAT.BACKWARD
+#             print("backward"),
+# 
+#         randomsteps = random.randint(10,50)
+#         print("%d steps" % randomsteps)
+# 
+#         st2 = threading.Thread(target=stepper_worker, args=(myStepper2, randomsteps, dir, stepstyles[random.randint(0,3)],))
+#         st2.start()
