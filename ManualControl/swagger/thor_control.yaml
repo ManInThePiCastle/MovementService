@@ -8,16 +8,16 @@ paths:
     post:
       summary: Move the arm manually
       description: Moves the articulation that you specify the number of steps in the direction specified
-      operationId: manualcontrol.post_command
+      operationId: Thor_Control.post_manualcontrol
       produces:
         - text/plain;
       responses:
         200:
-          description: greeting response
+          description: Command Return
           schema:
             type: string
           examples:
-            "text/plain": "Hello John"
+            "text/plain": "Moving Art1 FORWARD by 100 steps"
       parameters:
         - name: direction
           in: path
