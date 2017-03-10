@@ -1,0 +1,36 @@
+swagger: "2.0"
+info:
+  title: "{{title}}"
+  version: "1.0"
+basePath: /v1
+paths:
+  /manualcontrol/{articulation}/{direction}/{numsteps}:
+    post:
+      summary: Move the arm manually
+      description: Moves the articulation that you specify the number of steps in the direction specified
+      operationId: manualcontrol.post_command
+      produces:
+        - text/plain;
+      responses:
+        200:
+          description: greeting response
+          schema:
+            type: string
+          examples:
+            "text/plain": "Hello John"
+      parameters:
+        - name: direction
+          in: path
+          description: Direction
+          required: true
+          type: string
+        - name: articulation
+          in: path
+          description: Articulation
+          required: true
+          type: string
+        - name: numsteps
+          in: path
+          description: Number of Steps
+          required: true
+          type: integer
