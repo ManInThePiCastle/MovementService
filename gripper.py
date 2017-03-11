@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 
+"""
+Gripper
+Code for testing, calibrating, and open/closing the gripper
+"""
+
 import time
 import wiringpi
 import curses
 
+
+# Setup the Gpio and the pin.
 wiringpi.wiringPiSetupGpio()
 
 wiringpi.pinMode(18, wiringpi.GPIO.PWM_OUTPUT)
@@ -28,7 +35,7 @@ MIN_PULSE = 85
 
 def input_char(message):
     """
-       Takes an input of a char from the input stream.  
+       Takes an input of a char from the input stream.
        Allows for manual testing
     """
     try:
@@ -44,23 +51,12 @@ def input_char(message):
     return chr(ch)
 
 
-def open_close_gripper(command):
-    """
-        Opens or closes the gripper
-    """
-    if command == 'close':
-        wiringpi.pwmWrite(18, MAX_PULSE)
-    if command == 'open':
-        wiringpi.pwmWrite(18, MIN_PULSE)
-    time.sleep(delay_period)
-
-
 def change_pulse(current_pulse, direction):
     """
         Changes the puluse up or down
         Basically moves the servo in a direction
     """
-    print("Trying to move pulse {0} {1} by  {2}".format(str(current_pulse), str(direction), str(pulse_delta))) 
+    print("Trying to move pulse {0} {1} by  {2}".format(str(current_pulse), str(direction), str(pulse_delta)))
     if direction == 'up':
         if current_pulse > MAX_PULSE - pulse_delta:
             print('Cannot increment further')
@@ -73,14 +69,26 @@ def change_pulse(current_pulse, direction):
             return current_pulse
         else:
             return current_pulse - pulse_delta
-            
+
+
+def open_close_gripper(command):
+    """
+        Opens or closes the gripper
+    """
+    if command == 'close':
+        wiringpi.pwmWrite(18, MAX_PULSE)
+    if command == 'open':
+        wiringpi.pwmWrite(18, MIN_PULSE)
+    time.sleep(delay_period)
+
+
 if __name__ == '__main__':
     while True:
         keystroke = input("Command (q to quit):")
         if keystroke.lower() == 'q':
             break
         elif keystroke == 'up':
-            pulse = change_pulse(pulse, 'up') 
+            pulse = change_pulse(pulse, 'up')
             wiringpi.pwmWrite(18, pulse)
             time.sleep(delay_period)
         elif keystroke == 'down':
@@ -89,6 +97,6 @@ if __name__ == '__main__':
             time.sleep(delay_period)
         else:
             open_close_gripper(keystroke)
-    
+
         print(str(pulse) + '\n')
 
