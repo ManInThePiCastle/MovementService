@@ -13,9 +13,9 @@ class motor(object):
         self._stepper = Adafruit_MotorHAT(addr = self._hat).getStepper(200, self._position)
 
     def step(self, reverse: int):
-    """
-        Steps the motor a single step in a direction
-    """
+        """
+            Steps the motor a single step in a direction
+        """
         if reverse == 0:
             self._stepper.oneStep(Adafruit_MotorHAT.FORWARD, STEP_STYLE)
         elif reverse == 1:
