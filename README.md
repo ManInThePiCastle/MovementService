@@ -2,7 +2,9 @@
 
 ## Thor_Control.py
 
-This run this via `sudo python3 Thor_Control.py` and it will start an API service running on port 8080.  This will allow control of the robot via the api defined in the swagger directory.
+This must be run on a RaspberryPi.
+
+Run this via `sudo python3 Thor_Control.py` and it will start an API service running on port 8080.  This will allow control of the robot via the api defined in the swagger directory.
 
 ## External Libraries
 
