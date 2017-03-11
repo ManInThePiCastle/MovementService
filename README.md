@@ -1,5 +1,9 @@
 # Movement Service for Man in the Pi Castle
 
+## Thor_Control.py
+
+This run this via `sudo python3 Thor_Control.py` and it will start an API service running on port 8080.  This will allow control of the robot via the api defined in the swagger directory.
+
 ## External Libraries
 
 ### ikpy
