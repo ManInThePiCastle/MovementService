@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from Adafruit_MotorHAT import Adafruit_MotorHAT, \
+    Adafruit_DCMotor, Adafruit_StepperMotor
 import time
 import atexit
 import connexion
@@ -8,7 +10,8 @@ import copy
 import motor
 import art
 
-logging.basicConfig(format="%(asctime)s - %(levelname)s - %(name)s - %(message)s")
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s")
 log = logging.getLogger("ThorControl")
 log.setLevel(logging.INFO)
 
@@ -42,7 +45,8 @@ art6 = art([[m6, 0], [m7, 1]])
 def post_manualcontrol(articulation: int, reverse: int, numsteps: int) -> str:
     art_dict = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
     art_dict[articulation].move_steps(reverse, numsteps)
-    return "Moving {0} {1} by {2} steps\n".format(articulation, direction, numsteps)
+    return "Moving {0} {1} by {2} steps\n"\
+        .format(articulation, direction, numsteps)
 
 if __name__ == '__main__':
     app = connexion.App(__name__, 8080, specification_dir='swagger/')
