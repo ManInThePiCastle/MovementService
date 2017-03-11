@@ -4,7 +4,7 @@ info:
   version: "1.0"
 basePath: /v1
 paths:
-  /manualcontrol/{articulation}/{direction}/{numsteps}:
+  /manualcontrol/{articulation}/{reverse}/{numsteps}:
     post:
       summary: Move the arm manually
       description: Moves the articulation that you specify the number of steps in the direction specified
@@ -19,9 +19,9 @@ paths:
           examples:
             "text/plain": "Moving Art1 FORWARD by 100 steps"
       parameters:
-        - name: direction
+        - name: reverse
           in: path
-          description: Direction
+          description: Reverses the default direction 
           required: true
           type: string
         - name: articulation
