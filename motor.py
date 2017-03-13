@@ -2,6 +2,8 @@
 
 from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_StepperMotor
 
+STEP_STYLE = Adafruit_MotorHAT.INTERLEAVE
+
 class motor(object):
     """
         A motor is defined by a hat and a position

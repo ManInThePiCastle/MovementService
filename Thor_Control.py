@@ -44,15 +44,15 @@ art6 = art([[m6, 0], [m7, 1]])
 #
 #atexit.register(turnOffMotors)
 
-def post_manualcontrol(articulation: int, reverse: int, numsteps: int) -> str:
+def post_manualcontrol(articulation: int, reverse: int, numsteps: int):
     """
         Uses the swagger defined manualcontrol endpoint
         Allows for manual control of an articulation
     """
     art_dict = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
-    art_dict[articulation].move_steps(reverse, numsteps)
-    return "Moving {0} {1} by {2} steps\n"\
-        .format(articulation, direction, numsteps)
+    print(type(articulation))
+    art_dict[int(articulation)].move_steps(reverse, numsteps)
+    return "Moving {0} {1} by {2} steps\n".format(articulation, direction, numsteps)
 
 if __name__ == '__main__':
     """
