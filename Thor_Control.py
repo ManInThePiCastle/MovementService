@@ -29,12 +29,13 @@ m7 = motor(0x60, 1)
 
 # Define the articulations.  These are a list of lists
 # that inculde a motor and a default reverse spec
-art1 = art([[m1, 0]])
-art2 = art([[m2, 0], [m3, 0]])
-art3 = art([[m4, 0]])
-art4 = art([[m5, 0]])
-art5 = art([[m6, 0], [m7, 0]])
-art6 = art([[m6, 0], [m7, 1]])
+# Also include a number of degrees per step as a float
+art1 = art([[m1, 0]], 1.0)
+art2 = art([[m2, 0], [m3, 0]], 1.0)
+art3 = art([[m4, 0]], 1.0)
+art4 = art([[m5, 0]], 1.0)
+art5 = art([[m6, 0], [m7, 0]], 1.0)
+art6 = art([[m6, 0], [m7, 1]], 1.0)
 
 # recommended for auto-disabling motors on shutdown!
 #def turnOffMotors():
