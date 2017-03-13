@@ -19,7 +19,7 @@ STEP_STYLE = Adafruit_MotorHAT.DOUBLE
 
 # Define motors 1-7 from the bottom of the bot to the top.
 # The definition is a motor hat, and a hat position
-m1 = motor(0x62, 2)
+m1 = motor(0x61, 2)
 m2 = motor(0x63, 2)
 m3 = motor(0x61, 1)
 m4 = motor(0x63, 1)
