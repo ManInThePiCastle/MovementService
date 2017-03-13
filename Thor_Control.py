@@ -10,9 +10,8 @@ import copy
 from motor import motor
 from art import art
 
-import logging
 log = logging.getLogger('Thor')
-hdlr = logging.FileHandler('/tmp/thor.log')
+hdlr = logging.FileHandler('thor.log')
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 hdlr.setFormatter(formatter)
 log.addHandler(hdlr) 
