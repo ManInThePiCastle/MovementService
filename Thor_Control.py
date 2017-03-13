@@ -54,6 +54,13 @@ def post_manualcontrol(articulation: int, reverse: int, numsteps: int):
     art_dict[int(articulation)].move_steps(reverse, numsteps)
     return "Moving {0} {1} by {2} steps\n".format(articulation, reverse, numsteps)
 
+def post_grippercontrol(direction: str):
+    """
+        Swagger defined gripper control endpoint
+        commands are 'open' or 'close'
+    """
+    print("Trying to {0} the gripper".format(direction))
+
 if __name__ == '__main__':
     """
         Load the connexion app to run the API

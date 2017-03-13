@@ -34,3 +34,23 @@ paths:
           description: Number of Steps
           required: true
           type: integer
+  /manualcontrol/gripper/{command}:
+    post:
+      summary: Open or close the gripper
+      description: Opens or closes the gripper
+      operationId: Thor_Control.post_grippercontrol
+      produces:
+        - text/plain;
+      responses:
+        200:
+          description: Command Return
+          schema:
+            type: string
+          examples:
+            "text/plain": "Closing the gripper"
+      parameters:
+        - name: command
+          in: path
+          description: Open or close the gripper
+          required: true
+          type: string
