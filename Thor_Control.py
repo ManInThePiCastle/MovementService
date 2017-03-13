@@ -50,9 +50,8 @@ def post_manualcontrol(articulation: int, reverse: int, numsteps: int):
         Allows for manual control of an articulation
     """
     art_dict = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
-    print(type(articulation))
     art_dict[int(articulation)].move_steps(reverse, numsteps)
-    return "Moving {0} {1} by {2} steps\n".format(articulation, reverse, numsteps)
+    return "Moving art{0} reverse {1} by {2} steps\n".format(articulation, bool(reverse), numsteps)
 
 def post_grippercontrol(direction: str):
     """

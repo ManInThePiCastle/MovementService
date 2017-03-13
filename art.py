@@ -15,8 +15,7 @@ class art(object):
         self._motors.append([motor_number, reverse])
         print(self._motors)
 
-    def move_steps(self, reverse: int, steps):
-        print(self._motors)
+    def move_steps(self, reverse, steps):
         for step in range(steps):
             for motor, def_direction in self._motors:
-                motor.step(bool(reverse) ^ bool(def_direction))
+                motor.step(bool(int(reverse)) ^ bool(int(def_direction)))
