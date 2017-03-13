@@ -10,6 +10,8 @@ class art(object):
     """
     def __init__(self, motors):
         self._motors = motors
+        for motor, def_direction in self._motors:
+            motor.step(True)
 
     def addmotor(self, motor_number, reverse):
         self._motors.append([motor_number, reverse])
