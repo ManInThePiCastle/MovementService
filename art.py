@@ -22,7 +22,7 @@ class art(object):
         for step in range(steps):
             for motor, def_direction in self._motors:
                 motor.step(bool(int(reverse)) ^ bool(int(def_direction)))
-    
+
     def move_degrees(self, degrees):
         try:
             float(degrees)
@@ -37,7 +37,7 @@ class art(object):
         else:
             print("Something went wrong with number of degrees")
             break
-        
-        move_steps(direction, num_steps)            
 
-        
+        move_steps(direction, num_steps)
+
+

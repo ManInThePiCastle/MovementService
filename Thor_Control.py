@@ -10,9 +10,12 @@ import copy
 from motor import motor
 from art import art
 
-logging.basicConfig(
-    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s")
-log = logging.getLogger("ThorControl")
+import logging
+log = logging.getLogger('Thor')
+hdlr = logging.FileHandler('/tmp/thor.log')
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+hdlr.setFormatter(formatter)
+log.addHandler(hdlr) 
 log.setLevel(logging.INFO)
 
 STEP_STYLE = Adafruit_MotorHAT.DOUBLE
@@ -31,7 +34,7 @@ m7 = motor(0x60, 1)
 # that inculde a motor and a default reverse spec
 # Also include a number of degrees per step as a float
 art1 = art([[m1, 0]], 1.0)
-art2 = art([[m2, 0], [m3, 0]], 1.0)
+art2 = art([[m2, 0], [m3, 0]], 0.35)
 art3 = art([[m4, 0]], 1.0)
 art4 = art([[m5, 0]], 1.0)
 art5 = art([[m6, 0], [m7, 0]], 1.0)
@@ -51,7 +54,8 @@ def post_manualcontrol(articulation: int, reverse: int, numsteps: int):
         Allows for manual control of an articulation
     """
     art_dict = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
-    art_dict[int(articulation)].move_steps(reverse, numsteps)
+    #art_dict[int(articulation)].move_steps(reverse, numsteps)
+    art_dict[int(articulation)].move_degrees(numsteps)
     return "Moving art{0} reverse {1} by {2} steps\n".format(articulation, bool(reverse), numsteps)
 
 def post_grippercontrol(direction: str):
