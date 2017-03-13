@@ -36,7 +36,7 @@ class art(object):
             direction = 0
         else:
             log.error("move_degrees - Number of degrees is 0")
-            break
+            return None
         log.info("move_degrees - Moving {0} steps. Reverse: {1}".format(num_steps, direction))
         move_steps(direction, num_steps)
 
