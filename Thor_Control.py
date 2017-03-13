@@ -62,7 +62,7 @@ def post_grippercontrol(direction: str):
         Swagger defined gripper control endpoint
         commands are 'open' or 'close'
     """
-    print("Trying to {0} the gripper".format(direction))
+    log.info("Trying to {0} the gripper".format(direction))
 
 if __name__ == '__main__':
     """

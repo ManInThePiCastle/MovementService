@@ -27,17 +27,16 @@ class art(object):
         try:
             float(degrees)
         except ValueError:
-            print("You must move a number of degrees")
-            break
+            log.error("move_degrees - ValueError")
+            return None
         num_steps = degrees * self.deg_per_step
         if degrees < 0:
             direction = 1
         elif degrees > 0:
             direction = 0
         else:
-            print("Something went wrong with number of degrees")
+            log.error("move_degrees - Number of degrees is 0")
             break
-
+        log.info("move_degrees - Moving {0} steps. Reverse: {1}".format(num_steps, direction))
         move_steps(direction, num_steps)
-
 
