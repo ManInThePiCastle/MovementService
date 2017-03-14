@@ -32,13 +32,8 @@ class art(object):
         log.info("move_steps - Starting")
         for motor, def_direction in self._motors:
             current_direction = bool(int(reverse)) ^ bool(int(def_direction))
-            threading.Thread(target=self._motor.step_threaded, args=(current_direction, steps).start()
             log.debug("Stepping motor {0} direction {1}".format(motor, current_direction))
-#        for step in range(steps):
-#            for motor, def_direction in self._motors:
-#                current_direction = bool(int(reverse)) ^ bool(int(def_direction))
-#                log.debug("Stepping motor {0} direction {1}".format(motor, current_direction))
-#                motor.step(current_direction)
+            motor.step_multiple(current_direction, steps)
 
     def move_degrees(self, reverse, degrees):
         log.info("move_degrees - Starting".format(degrees))

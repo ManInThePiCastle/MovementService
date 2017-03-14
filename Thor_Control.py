@@ -60,19 +60,17 @@ def post_motorsteps(hat: int, position: int, reverse: int, numsteps: int):
         log.debug("Stepping hat {0} position {1} reverse {2}".format(hat, position, bool(int(reverse))))
         test_motor.step(bool(int(reverse)))
 
-def post_threadsteps(articulation: int, reverse: int, numsteps: int):
-    """
-        Creates a thread for each movement
-    """
-    log.debug("post_threadsteps - Starting")
- 
-
+    
 def post_artsteps(articulation: int, reverse: int, numsteps: int):
     """
         Uses the swagger defined manualcontrol endpoint
         Allows for manual control of an articulation
+        Starts a process for each movement
     """
     log.debug("post_artsteps - starting")
+    p = multiprocessing.Process(target=art_dict[int(articulation)].move_steps, args=(reverse, numsteps))                  
+    jobs.append(p)                                                                                                    
+    p.start()                                                                                                         
     art_dict[int(articulation)].move_steps(reverse, numsteps)
     log.info("POST ManualControl Art {0} Steps {1} Reverse {2}".format(articulation, numsteps, reverse))
     return "Moving art{0} reverse {1} by {2} steps\n".format(articulation, reverse, numsteps)
