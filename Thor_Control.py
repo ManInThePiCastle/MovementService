@@ -12,7 +12,7 @@ from motor import motor
 from art import art
 
 log = logging.getLogger('Thor_Main')
-hdlr = logging.FileHandler('thor.log')
+hdlr = logging.FileHandler('/var/log/thor_control.log')
 formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
 hdlr.setFormatter(formatter)
 log.addHandler(hdlr)

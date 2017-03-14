@@ -22,6 +22,7 @@ class art(object):
         self._deg_per_step = degrees_per_step
         for motor, def_direction in self._motors:
             motor.step(True)
+            motor.step(False)
 
     def addmotor(self, motor_number, reverse):
         self._motors.append([motor_number, reverse])
