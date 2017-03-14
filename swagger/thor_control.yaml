@@ -4,11 +4,11 @@ info:
   version: "1.0"
 basePath: /v1
 paths:
-  /manualcontrol/{articulation}/{reverse}/{numsteps}:
+  /art-step/{articulation}/{reverse}/{numsteps}:
     post:
-      summary: Move the arm manually
+      summary: Move an articulation by steps
       description: Moves the articulation that you specify the number of steps in the direction specified
-      operationId: Thor_Control.post_manualcontrol
+      operationId: Thor_Control.post_artsteps
       produces:
         - text/plain;
       responses:
@@ -21,7 +21,37 @@ paths:
       parameters:
         - name: reverse
           in: path
-          description: Reverses the default direction 
+          description: Reverses the default direction. Expects 0 or 1
+          required: true
+          type: string
+        - name: articulation
+          in: path
+          description: Articulation Number (1-6)
+          required: true
+          type: string
+        - name: numsteps
+          in: path
+          description: Number of Steps (int)
+          required: true
+          type: integer
+  /art-degrees/{articulation}/{reverse}/{degrees}:
+    post:
+      summary: Move an articulation by degrees
+      description: Moves the articulation that you specify the number of degrees in the direction specified
+      operationId: Thor_Control.post_artdegrees
+      produces:
+        - text/plain;
+      responses:
+        200:
+          description: Command Return
+          schema:
+            type: string
+          examples:
+            "text/plain": "Moving Art1 FORWARD by 100 degrees"
+      parameters:
+        - name: reverse
+          in: path
+          description: Reverses the default direction
           required: true
           type: string
         - name: articulation
@@ -29,12 +59,12 @@ paths:
           description: Articulation
           required: true
           type: string
-        - name: numsteps
+        - name: degrees
           in: path
-          description: Number of Steps
+          description: Number of Degrees
           required: true
           type: integer
-  /manualcontrol/gripper/{command}:
+  /gripper/{command}:
     post:
       summary: Open or close the gripper
       description: Opens or closes the gripper

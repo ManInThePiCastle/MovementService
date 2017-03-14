@@ -46,16 +46,26 @@ art6 = art([[m6, 0], [m7, 1]], 1.0)
 #
 #atexit.register(turnOffMotors)
 
-def post_manualcontrol(articulation: int, reverse: int, numsteps: int):
+def post_artsteps(articulation: int, reverse: int, numsteps: int):
     """
         Uses the swagger defined manualcontrol endpoint
         Allows for manual control of an articulation
     """
     art_dict = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
     #art_dict[int(articulation)].move_steps(reverse, numsteps)
+    art_dict[int(articulation)].move_steps(numsteps)
+    log.info("POST ManualControl Art {0} Steps {1} Reverse {2}".format(articulation, numsteps, reverse))
+    return "Moving art{0} reverse {1} by {2} steps\n".format(articulation, bool(reverse), numsteps)
+
+def post_artdegrees(articulation: int, reverse: int, degrees: int):
+    """
+        Uses the degrees endpoint
+        Allows movement of a single articulation by degrees
+    """
+    art_dict = = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
     art_dict[int(articulation)].move_degrees(numsteps)
     log.info("POST ManualControl Art {0} Degrees {1} Reverse {2}".format(articulation, numsteps, reverse))
-    return "Moving art{0} reverse {1} by {2} steps\n".format(articulation, bool(reverse), numsteps)
+    return "Moving art{0} reverse {1} by {2} degrees\n".format(articulation, bool(reverse), numsteps)
 
 def post_grippercontrol(direction: str):
     """

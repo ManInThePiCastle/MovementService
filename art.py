@@ -36,7 +36,7 @@ class art(object):
                 motor.step(current_direction)
 
     def move_degrees(self, degrees):
-        log.info("move_degrees - Start")
+        log.info("move_degrees - Start with input of {0} degrees".format(degrees))
         try:
             float(degrees)
         except ValueError:
