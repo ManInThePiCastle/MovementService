@@ -8,6 +8,7 @@ import connexion
 import logging
 import copy
 import sys
+from gripper import open_close_gripper
 from motor import motor
 from art import art
 
@@ -86,6 +87,14 @@ def post_gripper(command):
         commands are 'open' or 'close'
     """
     log.info("Trying to {0} the gripper".format(command))
+    if command != 'open' and command !='close':
+        log.error("post_gripper - Invalid Command!!")
+        return "Bad command for gripper\n"
+    try:
+        open_close_gripper(command)
+    except Exception as e:
+        log.error("post_gripper - {0}".format(str(e)))
+        return "Error controlling gripper.  See logs\n"
     return "Trying to {0} the gripper".format(command)
 
 if __name__ == '__main__':

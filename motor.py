@@ -2,6 +2,7 @@
 
 from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_StepperMotor
 import logging
+import threading
 
 log = logging.getLogger('Thor_Motor')
 hdlr = logging.FileHandler('thor.log')
@@ -10,7 +11,7 @@ hdlr.setFormatter(formatter)
 log.addHandler(hdlr)
 log.setLevel(logging.DEBUG)
 
-STEP_STYLE = Adafruit_MotorHAT.DOUBLE
+STEP_STYLE = Adafruit_MotorHAT.SINGLE
 
 class motor(object):
     """
@@ -22,7 +23,15 @@ class motor(object):
         self._hat = hat
         self._position = position
         self._stepper = Adafruit_MotorHAT(addr = self._hat).getStepper(200, self._position)
+        self._stepper.setSpeed(50)
         log.info("Initializing Motor hat {0} position {1}".format(hat, position))
+
+    def step_threaded(self, reverse: int, numsteps: int):
+        """
+            Uses blocking steps and moves faster
+        """
+        log.info("step_threaded - Starting")
+        self._stepper.step(numsteps, reverse, STEP_STYLE)
 
 
     def step(self, reverse: int):
