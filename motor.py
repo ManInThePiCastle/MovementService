@@ -26,9 +26,9 @@ class motor(object):
         self._stepper.setSpeed(50)
         log.info("Initializing Motor hat {0} position {1}".format(hat, position))
 
-    def step_threaded(self, reverse: int, numsteps: int):
+    def step_mutltiple(self, reverse: int, numsteps: int):
         """
-            Uses blocking steps and moves faster
+            Uses blocking steps and moves based on the setSpeed above
         """
         log.info("step_threaded - Starting")
         self._stepper.step(numsteps, reverse, STEP_STYLE)
