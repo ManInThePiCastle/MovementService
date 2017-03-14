@@ -37,7 +37,26 @@ art3 = art([[m4, 0]], 1.0)
 art4 = art([[m5, 0]], 1.0)
 art5 = art([[m6, 0], [m7, 0]], 1.0)
 art6 = art([[m6, 0], [m7, 1]], 1.0)
-art_dict = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
+
+# Fake for testing
+art7 = art([[m6, 0]], 1.0)
+art8 = art([[m7, 0]], 1.0)
+
+art_dict = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6, 7: art7, 8: art8}
+
+def post_motorsteps(hat: int, position: int, reverse: int, numsteps: int):
+    """
+        Allows a single motor to be controlled by address
+    """
+    log.debug("post_motorsteps - Starting. hat={0} position={1} reverse={2} numsteps={3}".format(hat, position, reverse, numsteps))
+    try:
+        hat = int('0x6{0}'.format(hat), 16)
+    except Exception as e:
+        log.error("{0}".format(str(e)))
+    test_motor = motor(hat, position)
+    for step in range(numsteps):
+        log.debug("Stepping hat {0} position {1} reverse {2}".format(hat, position, bool(int(reverse))))
+        test_motor.step(bool(int(reverse)))
 
 
 def post_artsteps(articulation: int, reverse: int, numsteps: int):
