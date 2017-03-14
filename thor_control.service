@@ -1,0 +1,11 @@
+[Unit]
+Description=Thor Arm Control Service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /etc/Thor_Control/Thor_Control.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+Alias=thor_control.service
