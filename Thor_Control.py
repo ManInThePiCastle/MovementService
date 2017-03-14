@@ -7,17 +7,16 @@ import atexit
 import connexion
 import logging
 import copy
+import sys
 from motor import motor
 from art import art
 
-log = logging.getLogger('Thor')
+log = logging.getLogger('Thor_Main')
 hdlr = logging.FileHandler('thor.log')
-formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+formatter = logging.Formatter('%(asctime)s %(name:10)s %(levelname)s %(message)s')
 hdlr.setFormatter(formatter)
-log.addHandler(hdlr) 
-log.setLevel(logging.INFO)
-
-STEP_STYLE = Adafruit_MotorHAT.DOUBLE
+log.addHandler(hdlr)
+log.setLevel(logging.DEBUG)
 
 # Define motors 1-7 from the bottom of the bot to the top.
 # The definition is a motor hat, and a hat position
@@ -55,6 +54,7 @@ def post_manualcontrol(articulation: int, reverse: int, numsteps: int):
     art_dict = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
     #art_dict[int(articulation)].move_steps(reverse, numsteps)
     art_dict[int(articulation)].move_degrees(numsteps)
+    log.info("POST ManualControl Art {0} Degrees {1} Reverse {2}".format(articulation, numsteps, reverse))
     return "Moving art{0} reverse {1} by {2} steps\n".format(articulation, bool(reverse), numsteps)
 
 def post_grippercontrol(direction: str):
