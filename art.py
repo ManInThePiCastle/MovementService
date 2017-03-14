@@ -35,21 +35,14 @@ class art(object):
                 log.debug("Stepping motor {0} direction {1}".format(motor, current_direction))
                 motor.step(current_direction)
 
-    def move_degrees(self, degrees):
-        log.info("move_degrees - Start with input of {0} degrees".format(degrees))
+    def move_degrees(self, reverse, degrees):
+        log.info("move_degrees - Starting".format(degrees))
         try:
             float(degrees)
         except ValueError:
             log.error("move_degrees - ValueError")
             return None
         num_steps = (degrees * self._deg_per_step)
-        if degrees < 0:
-            direction = 1
-        elif degrees > 0:
-            direction = 0
-        else:
-            log.error("move_degrees - Number of degrees is 0")
-            return None
         log.info("move_degrees - Moving {0} steps. Reverse: {1}".format(int(num_steps), direction))
         log.debug("move_degrees - type(direction)={0} type(num_steps)={1}".format(type(direction), type(num_steps)))
         self.move_steps(direction, int(num_steps))

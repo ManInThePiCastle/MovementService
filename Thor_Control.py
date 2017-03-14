@@ -46,18 +46,18 @@ def post_artsteps(articulation: int, reverse: int, numsteps: int):
         Allows for manual control of an articulation
     """
     log.debug("post_artsteps - starting")
-    art_dict[int(articulation)].move_steps(numsteps)
+    art_dict[int(articulation)].move_steps(reverse, numsteps)
     log.info("POST ManualControl Art {0} Steps {1} Reverse {2}".format(articulation, numsteps, reverse))
     return "Moving art{0} reverse {1} by {2} steps\n".format(articulation, reverse, numsteps)
 
 
-def post_artdegrees(articulation: int, reverse: int, degrees: int):
+def post_artdegrees(articulation: int, reverse: int, degrees: float):
     """
         Uses the degrees endpoint
         Allows movement of a single articulation by degrees
     """
     log.debug("post_artdegrees - starting")
-    art_dict[int(articulation)].move_degrees(degrees)
+    art_dict[int(articulation)].move_degrees(reverse, degrees)
     log.info("POST ManualControl Art {0} Degrees {1} Reverse {2}".format(articulation, degrees, reverse))
     return "Moving art{0} reverse {1} by {2} degrees\n".format(articulation, bool(reverse), degrees)
 
