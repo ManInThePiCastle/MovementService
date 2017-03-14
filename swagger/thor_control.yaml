@@ -63,7 +63,7 @@ paths:
           in: path
           description: Number of Degrees
           required: true
-          type: float
+          type: number 
   /gripper/{command}:
     post:
       summary: Open or close the gripper
