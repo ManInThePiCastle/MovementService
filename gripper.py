@@ -30,7 +30,7 @@ wiringpi.pwmWrite(18, pulse)
 # Minimum pulse is 85 (Gripper Open)
 # Maximum pulse is 185 (Gripper Closed)
 MAX_PULSE = 175
-MIN_PULSE = 110
+MIN_PULSE = 80
 
 
 def input_char(message):

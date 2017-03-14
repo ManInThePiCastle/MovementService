@@ -11,7 +11,7 @@ hdlr.setFormatter(formatter)
 log.addHandler(hdlr)
 log.setLevel(logging.DEBUG)
 
-STEP_STYLE = Adafruit_MotorHAT.SINGLE
+STEP_STYLE = Adafruit_MotorHAT.DOUBLE
 
 class motor(object):
     """
