@@ -29,6 +29,7 @@ class motor(object):
         """
             Steps the motor a single step in a direction
         """
+        log.debug("step - Starting a step")
         if reverse == 0:
             self._stepper.oneStep(Adafruit_MotorHAT.FORWARD, STEP_STYLE)
         elif reverse == 1:

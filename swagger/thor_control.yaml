@@ -68,7 +68,7 @@ paths:
     post:
       summary: Open or close the gripper
       description: Opens or closes the gripper
-      operationId: Thor_Control.post_grippercontrol
+      operationId: Thor_Control.post_gripper
       produces:
         - text/plain;
       responses:

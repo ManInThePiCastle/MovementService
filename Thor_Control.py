@@ -13,7 +13,7 @@ from art import art
 
 log = logging.getLogger('Thor_Main')
 hdlr = logging.FileHandler('thor.log')
-formatter = logging.Formatter('%(asctime)s %(name:10)s %(levelname)s %(message)s')
+formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
 hdlr.setFormatter(formatter)
 log.addHandler(hdlr)
 log.setLevel(logging.DEBUG)
@@ -31,48 +31,43 @@ m7 = motor(0x60, 1)
 # Define the articulations.  These are a list of lists
 # that inculde a motor and a default reverse spec
 # Also include a number of degrees per step as a float
-art1 = art([[m1, 0]], 1.0)
+art1 = art([[m1, 0]], 1.8)
 art2 = art([[m2, 0], [m3, 0]], 0.35)
 art3 = art([[m4, 0]], 1.0)
 art4 = art([[m5, 0]], 1.0)
 art5 = art([[m6, 0], [m7, 0]], 1.0)
 art6 = art([[m6, 0], [m7, 1]], 1.0)
+art_dict = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
 
-# recommended for auto-disabling motors on shutdown!
-#def turnOffMotors():
-#    for hat in [0x60, 0x61, 0x62, 0x63]:
-#        for motor in [1,2,3,4]:
-#            Adafruit_MotorHAT(addr = hat).getMotor(motor).run(Adafruit_MotorHAT.RELEASE)
-#
-#atexit.register(turnOffMotors)
 
 def post_artsteps(articulation: int, reverse: int, numsteps: int):
     """
         Uses the swagger defined manualcontrol endpoint
         Allows for manual control of an articulation
     """
-    art_dict = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
-    #art_dict[int(articulation)].move_steps(reverse, numsteps)
+    log.debug("post_artsteps - starting")
     art_dict[int(articulation)].move_steps(numsteps)
     log.info("POST ManualControl Art {0} Steps {1} Reverse {2}".format(articulation, numsteps, reverse))
-    return "Moving art{0} reverse {1} by {2} steps\n".format(articulation, bool(reverse), numsteps)
+    return "Moving art{0} reverse {1} by {2} steps\n".format(articulation, reverse, numsteps)
+
 
 def post_artdegrees(articulation: int, reverse: int, degrees: int):
     """
         Uses the degrees endpoint
         Allows movement of a single articulation by degrees
     """
-    art_dict = = {1: art1, 2: art2, 3: art3, 4: art4, 5: art5, 6: art6}
-    art_dict[int(articulation)].move_degrees(numsteps)
-    log.info("POST ManualControl Art {0} Degrees {1} Reverse {2}".format(articulation, numsteps, reverse))
-    return "Moving art{0} reverse {1} by {2} degrees\n".format(articulation, bool(reverse), numsteps)
+    log.debug("post_artdegrees - starting")
+    art_dict[int(articulation)].move_degrees(degrees)
+    log.info("POST ManualControl Art {0} Degrees {1} Reverse {2}".format(articulation, degrees, reverse))
+    return "Moving art{0} reverse {1} by {2} degrees\n".format(articulation, bool(reverse), degrees)
 
-def post_grippercontrol(direction: str):
+def post_gripper(command):
     """
         Swagger defined gripper control endpoint
         commands are 'open' or 'close'
     """
-    log.info("Trying to {0} the gripper".format(direction))
+    log.info("Trying to {0} the gripper".format(command))
+    return "Trying to {0} the gripper".format(command)
 
 if __name__ == '__main__':
     """
