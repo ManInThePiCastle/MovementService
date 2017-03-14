@@ -3,6 +3,7 @@
 from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_StepperMotor
 import motor
 import logging
+import multiprocessing
 
 log = logging.getLogger('Thor_Art')
 hdlr = logging.FileHandler('thor.log')
@@ -30,11 +31,15 @@ class art(object):
 
     def move_steps(self, reverse, steps):
         log.info("move_steps - Starting")
+        jobs = []
         for motor, def_direction in self._motors:
             current_direction = bool(int(reverse)) ^ bool(int(def_direction))
+            p = multiprocessing.Process(target=motor.step_multiple, args=(current_direction, steps))
+            jobs.append(p)
             log.debug("Stepping motor {0} direction {1}".format(motor, current_direction))
             motor.step_multiple(current_direction, steps)
-
+        for job in jobs:
+            job.start()
     def move_degrees(self, reverse, degrees):
         log.info("move_degrees - Starting".format(degrees))
         try:

@@ -73,7 +73,7 @@ def post_artsteps(articulation: int, reverse: int, numsteps: int):
         p.start()
     except Exception as e:
         log.error(str(e))
-    art_dict[int(articulation)].move_steps(reverse, numsteps)
+    #art_dict[int(articulation)].move_steps(reverse, numsteps)
     log.info("POST ManualControl Art {0} Steps {1} Reverse {2}".format(articulation, numsteps, reverse))
     return "Moving art{0} reverse {1} by {2} steps\n".format(articulation, reverse, numsteps)
 

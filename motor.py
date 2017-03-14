@@ -23,7 +23,7 @@ class motor(object):
         self._hat = hat
         self._position = position
         self._stepper = Adafruit_MotorHAT(addr = self._hat).getStepper(200, self._position)
-        self._stepper.setSpeed(50)
+        self._stepper.setSpeed(1000)
         log.info("Initializing Motor hat {0} position {1}".format(hat, position))
 
     def step_multiple(self, reverse: int, numsteps: int):
