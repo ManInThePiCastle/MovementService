@@ -8,6 +8,7 @@ import connexion
 import logging
 import copy
 import sys
+import multiprocessing
 from gripper import open_close_gripper
 from motor import motor
 from art import art
@@ -59,6 +60,12 @@ def post_motorsteps(hat: int, position: int, reverse: int, numsteps: int):
         log.debug("Stepping hat {0} position {1} reverse {2}".format(hat, position, bool(int(reverse))))
         test_motor.step(bool(int(reverse)))
 
+def post_threadsteps(articulation: int, reverse: int, numsteps: int):
+    """
+        Creates a thread for each movement
+    """
+    log.debug("post_threadsteps - Starting")
+ 
 
 def post_artsteps(articulation: int, reverse: int, numsteps: int):
     """
