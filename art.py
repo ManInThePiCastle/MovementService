@@ -52,5 +52,5 @@ class art(object):
             return None
         log.info("move_degrees - Moving {0} steps. Reverse: {1}".format(int(num_steps), direction))
         log.debug("move_degrees - type(direction)={0} type(num_steps)={1}".format(type(direction), type(num_steps)))
-        move_steps(direction, int(num_steps))
+        self.move_steps(direction, int(num_steps))
 
