@@ -8,7 +8,7 @@ paths:
     post:
       summary: Move a motor by steps
       description: Moves the motor that you specify the number of steps in the direction specified
-      operationId: Thor_Control.post_artsteps
+      operationId: Thor_Control.post_motorsteps
       produces:
         - text/plain;
       responses:
@@ -28,12 +28,12 @@ paths:
           in: path
           description: Hat Number (0-3)
           required: true
-          type: int
+          type: integer
         - name: position
           in: path
           description: Hat Position (1 or 2)
           required: true
-          type: int
+          type: integer
         - name: numsteps
           in: path
           description: Number of Steps (int)
