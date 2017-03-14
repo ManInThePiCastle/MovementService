@@ -4,6 +4,41 @@ info:
   version: "1.0"
 basePath: /v1
 paths:
+  /motor/{hat}/{position}/{reverse}/{numsteps}:
+    post:
+      summary: Move a motor by steps
+      description: Moves the motor that you specify the number of steps in the direction specified
+      operationId: Thor_Control.post_artsteps
+      produces:
+        - text/plain;
+      responses:
+        200:
+          description: Command Return
+          schema:
+            type: string
+          examples:
+            "text/plain": "Moving Art1 FORWARD by 100 steps"
+      parameters:
+        - name: reverse
+          in: path
+          description: Reverses the default direction. Expects 0 or 1
+          required: true
+          type: string
+        - name: hat
+          in: path
+          description: Hat Number (0-3)
+          required: true
+          type: int
+        - name: position
+          in: path
+          description: Hat Position (1 or 2)
+          required: true
+          type: int
+        - name: numsteps
+          in: path
+          description: Number of Steps (int)
+          required: true
+          type: integer
   /art-step/{articulation}/{reverse}/{numsteps}:
     post:
       summary: Move an articulation by steps
@@ -63,7 +98,7 @@ paths:
           in: path
           description: Number of Degrees
           required: true
-          type: number 
+          type: number
   /gripper/{command}:
     post:
       summary: Open or close the gripper
